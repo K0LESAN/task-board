@@ -1,0 +1,20 @@
+{
+  "name": "task-board",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack",
+    "build-prod": "webpack --mode=production",
+    "clean": "rd /s /q dist"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "webpack"
+  ],
+  "author": "k0lesan2k00@gmail.com",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}
