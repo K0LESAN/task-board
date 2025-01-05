@@ -33,7 +33,7 @@ const TaskBoard = () => {
       <header className={styles.header}>
         <h1 className={styles.title}>Your tasks</h1>
         <label className={styles.search} htmlFor='search'>
-          <img className={styles.search__icon} src={searchIcon} alt='поиск' />
+          <img className={styles.search__icon} src={searchIcon} alt='search' />
           <input
             className={styles.search__field}
             id='search'
