@@ -1,11 +1,5 @@
-import type {
-  PropsWithChildren,
-  MouseEvent,
-  TouchEvent,
-  PointerEvent,
-} from 'react';
+import type { PropsWithChildren, MouseEvent, TouchEvent } from 'react';
 import {
-  PointerSensor,
   MouseSensor,
   TouchSensor,
   DndContext,
@@ -33,21 +27,8 @@ TouchSensor.activators = [
   },
 ];
 
-PointerSensor.activators = [
-  {
-    eventName: 'onPointerDown',
-    handler: ({ nativeEvent: event }: PointerEvent) => {
-      return customDragHandler(event.target);
-    },
-  },
-];
-
 const DnDProvider = ({ children }: PropsWithChildren) => {
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(MouseSensor),
-    useSensor(TouchSensor)
-  );
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   return (
     <DndContext sensors={sensors} modifiers={[restrictToWindowEdges]}>
