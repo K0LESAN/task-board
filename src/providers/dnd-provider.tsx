@@ -42,7 +42,7 @@ PointerSensor.activators = [
   },
 ];
 
-export default function DnDProvider({ children }: PropsWithChildren) {
+const DnDProvider = ({ children }: PropsWithChildren) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(MouseSensor),
@@ -54,4 +54,6 @@ export default function DnDProvider({ children }: PropsWithChildren) {
       {children}
     </DndContext>
   );
-}
+};
+
+export default DnDProvider;
