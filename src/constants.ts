@@ -1,5 +1,12 @@
 import type { TagName } from './types';
 
+enum TodoType {
+  todo = 'todo',
+  inProgress = 'in_progress',
+  review = 'review',
+  done = 'done',
+}
+
 const ignoreTags: TagName[] = [
   'button',
   'input',
@@ -10,4 +17,4 @@ const ignoreTags: TagName[] = [
   'option',
 ];
 
-export { ignoreTags };
+export { ignoreTags, TodoType };
