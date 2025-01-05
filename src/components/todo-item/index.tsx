@@ -1,8 +1,8 @@
 import type { Todo } from '@/types';
 import { TodoType } from '@/constants';
 import { formatTimestamp } from '@/utilities/format-timestamp';
-import * as styles from './index.module.scss';
 import TodoButtons from '../todo-buttons';
+import * as styles from './index.module.scss';
 
 interface Props {
   todo: Todo;
