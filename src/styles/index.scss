@@ -5,5 +5,11 @@
 body {
   background-image: url('../assets/images/home-background.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-position: top;
+  overflow-x: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
