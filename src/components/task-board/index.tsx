@@ -4,6 +4,7 @@ import { sortAndFilterTodos } from '@/utilities/sort-and-filter-todos';
 import { useDebounce } from '@/hooks/debounce';
 import searchIcon from '@/assets/icons/search.svg';
 import * as styles from './index.module.scss';
+import BoardContainer from '../board-container';
 
 const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
@@ -46,11 +47,9 @@ const TaskBoard = () => {
         </label>
       </header>
       <main>
-        <div className={styles.boards}>
-          {sortAndFilterTodos(todos, debouncedSearchText).map((todo: Todo) => {
-            return <div key={todo.id}>{todo.id}</div>;
-          })}
-        </div>
+        <BoardContainer
+          todos={sortAndFilterTodos(todos, debouncedSearchText)}
+        />
       </main>
     </>
   );
