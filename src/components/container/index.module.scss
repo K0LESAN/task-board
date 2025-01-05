@@ -1,0 +1,8 @@
+.container {
+  max-width: 100%;
+  width: core.to-rem(1920);
+  margin-right: auto;
+  margin-left: auto;
+  padding: core.to-rem(58, 40, 0, 40);
+  overflow-x: hidden;
+}
