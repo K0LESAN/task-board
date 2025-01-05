@@ -7,6 +7,13 @@ enum TodoType {
   done = 'done',
 }
 
+enum TranlateTodoType {
+  todo = 'To Do',
+  in_progress = 'In Progress',
+  review = 'Review',
+  done = 'Done',
+}
+
 const ignoreTags: TagName[] = [
   'button',
   'input',
@@ -17,4 +24,4 @@ const ignoreTags: TagName[] = [
   'option',
 ];
 
-export { ignoreTags, TodoType };
+export { ignoreTags, TodoType, TranlateTodoType };
