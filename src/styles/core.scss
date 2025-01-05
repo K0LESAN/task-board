@@ -46,26 +46,26 @@ $root-size: 16;
   @include font(40, 28);
   font-weight: 700;
   letter-spacing: 0.0036em;
-  color: var(--bold);
+  color: var(--primary);
 }
 
 %heading-2 {
   @include font(24, 28);
   font-weight: 700;
   letter-spacing: 0.0036em;
-  color: var(--bold);
+  color: var(--primary);
 }
 
 %label {
   @include font(14, 21);
   font-weight: 400;
   letter-spacing: -0.4px;
-  color: var(--bold);
+  color: var(--primary);
 }
 
 %value {
   @include font(14, 22);
   font-weight: 700;
   letter-spacing: -0.4px;
-  color: var(--regular);
+  color: var(--secondary);
 }
