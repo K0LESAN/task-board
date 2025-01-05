@@ -10,7 +10,7 @@ const TodoButtons = () => {
         <img className={styles.edit__icon} src={editIcon} alt='edit' />
       </button>
       <button className={styles.edit} type='button'>
-        <img className={styles.edit__icon} src={crossIcon} alt='remove' />
+        <img className={styles.edit__icon} src={crossIcon} alt='cancel' />
       </button>
       <button className={styles.edit} type='button'>
         <img className={styles.edit__icon} src={checkIcon} alt='add' />
