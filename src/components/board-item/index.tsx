@@ -39,7 +39,7 @@ const BoardItem = ({ todos, type }: Props) => {
           </button>
         )}
         {type === TodoType.done && (
-          <button className={styles.remove} type='button'>
+          <button type='button'>
             <img className={styles.trash} src={trashIcon} alt='remove' />
           </button>
         )}
