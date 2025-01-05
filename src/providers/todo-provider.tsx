@@ -9,8 +9,8 @@ import {
 
 export const todoContext = createContext<TodoContext>({
   todos: [],
-  addTodo() {},
   changeTodo() {},
+  createTodo() {},
   clearTodos() {},
   clearTodosByType() {},
   initTodos() {},
@@ -22,7 +22,7 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
   const initTodos = useCallback((newTodos: Todo[]): void => {
     setTodos(newTodos);
   }, []);
-  const addTodo = useCallback(
+  const createTodo = useCallback(
     (newTodo: Omit<Todo, 'id' | 'type'>): void => {
       const maxId: number = todos.reduce(
         (accMaxId: number, { id }: Todo): number => {
@@ -86,8 +86,8 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
     <todoContext.Provider
       value={{
         todos,
-        addTodo,
         changeTodo,
+        createTodo,
         clearTodos,
         clearTodosByType,
         initTodos,
