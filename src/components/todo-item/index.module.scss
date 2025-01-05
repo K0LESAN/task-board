@@ -1,4 +1,7 @@
 .todo {
+  display: flex;
+  flex-direction: column;
+  row-gap: core.to-rem(8);
   padding: core.to-rem(16);
   border-radius: core.to-rem(4);
   background-color: var(--background-secondary);
@@ -25,3 +28,4 @@
 .expired {
   color: var(--red);
 }
+

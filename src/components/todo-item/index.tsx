@@ -2,6 +2,7 @@ import type { Todo } from '@/types';
 import { TodoType } from '@/constants';
 import { formatTimestamp } from '@/utilities/format-timestamp';
 import * as styles from './index.module.scss';
+import TodoButtons from '../todo-buttons';
 
 interface Props {
   todo: Todo;
@@ -47,6 +48,7 @@ const TodoItem = ({ todo: { type, startDay, endDay, text } }: Props) => {
           value={text}
         />
       </label>
+      {type === TodoType.todo && <TodoButtons />}
     </div>
   );
 };
