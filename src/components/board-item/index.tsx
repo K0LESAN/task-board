@@ -7,6 +7,7 @@ import happyImage from '@/assets/icons/happy.svg';
 import upsideDownImage from '@/assets/icons/upside-down.svg';
 import TodoItem from '../todo-item';
 import * as styles from './index.module.scss';
+import { useTodo } from '@/hooks/todo';
 
 interface Props {
   todos: Todo[];
@@ -21,6 +22,7 @@ const BoardItem = ({ todos, type }: Props) => {
     [TodoType.review]: upsideDownImage,
     [TodoType.done]: ghostImage,
   };
+  const { clearTodosByType } = useTodo();
 
   return (
     <div className={styles.board}>
@@ -39,7 +41,12 @@ const BoardItem = ({ todos, type }: Props) => {
           </button>
         )}
         {type === TodoType.done && (
-          <button type='button'>
+          <button
+            type='button'
+            onClick={() => {
+              clearTodosByType(TodoType.done);
+            }}
+          >
             <img className={styles.trash} src={trashIcon} alt='remove' />
           </button>
         )}
