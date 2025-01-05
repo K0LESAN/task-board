@@ -11,7 +11,7 @@ interface Todo {
 interface TodoContext {
   readonly todos: Todo[];
   initTodos(newTodos: Todo[]): void;
-  addTodo(newTodo: Todo): void;
+  createTodo(newTodo: Omit<Todo, 'id' | 'type'>): void;
   removeTodo(id: number): void;
   changeTodo(newTodo: Todo): void;
   clearTodos(): void;
