@@ -1,5 +1,6 @@
 import type { Todo } from '@/types';
 import { TodoType, TranlateTodoType } from '@/constants';
+import { useTodo } from '@/hooks/todo';
 import trashIcon from '@/assets/icons/trash.svg';
 import smileImage from '@/assets/icons/smile.svg';
 import ghostImage from '@/assets/icons/ghost.svg';
@@ -46,7 +47,7 @@ const BoardItem = ({ todos, type }: Props) => {
       </div>
       <div className={styles.todos}>
         {todos.map((todo: Todo) => {
-          return <TodoItem todo={todo} />;
+          return <TodoItem key={todo.id} todo={todo} />;
         })}
       </div>
     </div>
