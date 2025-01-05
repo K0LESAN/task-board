@@ -45,7 +45,12 @@ module.exports = {
           mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `@use '${path.join(__dirname, 'src', 'styles', 'core')}' as core;`,
+            },
+          }
         ],
       },
       {

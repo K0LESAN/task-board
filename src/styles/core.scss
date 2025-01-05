@@ -1,0 +1,43 @@
+@use 'sass:math';
+@use 'sass:list';
+
+$root-size: 16;
+
+@function to-rem($sizes...) {
+  $list-size: ();
+
+  @each $size in $sizes {
+    $list-size: list.append($list-size, #{math.div($size, $root-size)}rem);
+  }
+
+  @return $list-size;
+}
+
+@function percent($dividend, $divider) {
+  @return math.percentage(math.div($dividend, $divider));
+}
+
+@mixin font($px, $leading) {
+  font-size: to-rem($px);
+  line-height: percent($px, $leading);
+}
+
+@mixin ellipsis($lines: 3) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin effect {
+  &:active {
+    @content;
+  }
+
+  @media screen and ((hover: hover) or (pointer: fine)) {
+    &:hover {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@font-face {
+  font: {
+    family: 'Inter';
+    style: normal;
+    weight: 400;
+  }
+
+  src: local('Inter Regular'), local('Inter-Regular'),
+    url('@/assets/fonts/inter-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font: {
+    family: 'Inter';
+    style: normal;
+    weight: 700;
+  }
+
+  src: local('Inter Bold'), local('Inter-Bold'),
+    url('@/assets/fonts/inter-bold.ttf') format('truetype');
+}
