@@ -1,6 +1,5 @@
 import type { Todo } from '@/types';
 import { TodoType, TranlateTodoType } from '@/constants';
-import { useTodo } from '@/hooks/todo';
 import trashIcon from '@/assets/icons/trash.svg';
 import smileImage from '@/assets/icons/smile.svg';
 import ghostImage from '@/assets/icons/ghost.svg';

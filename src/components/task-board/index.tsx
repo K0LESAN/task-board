@@ -2,24 +2,25 @@ import { type ChangeEvent, useState, useEffect } from 'react';
 import type { Todo } from '@/types';
 import { sortAndFilterTodos } from '@/utilities/sort-and-filter-todos';
 import { useDebounce } from '@/hooks/debounce';
+import { useTodo } from '@/hooks/todo';
 import searchIcon from '@/assets/icons/search.svg';
-import * as styles from './index.module.scss';
 import BoardContainer from '../board-container';
+import * as styles from './index.module.scss';
 
 const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedSearchText = useDebounce<string>(searchText, 500);
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const { todos, initTodos } = useTodo();
 
   useEffect(() => {
     const storageTodos: string | null = localStorage.getItem('todos');
     const parsedTodos: Todo[] = storageTodos ? JSON.parse(storageTodos) : [];
 
     if (parsedTodos.length) {
-      setTodos(parsedTodos);
+      initTodos(parsedTodos);
     } else {
       import('@/assets/tasks.json').then((importData): void => {
-        setTodos(importData.default as Todo[]);
+        initTodos(importData.default as Todo[]);
       });
     }
   }, []);
