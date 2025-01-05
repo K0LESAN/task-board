@@ -34,11 +34,7 @@ const TodoItem = ({ todo: { type, startDay, endDay, text } }: Props) => {
           value={formatTimestamp(endDay)}
         />
       </label>
-      <label
-        className={styles.field}
-        htmlFor='text'
-        style={{ textOverflow: 'ellipsis' }}
-      >
+      <label className={styles.field} htmlFor='text'>
         <span className={styles.label}>Описание:</span>{' '}
         <input
           className={styles.value}
