@@ -1,5 +1,6 @@
 import { type ChangeEvent, useState, useEffect } from 'react';
 import type { Todo } from '@/types';
+import { sortAndFilterTodos } from '@/utilities/sort-and-filter-todos';
 import searchIcon from '@/assets/icons/search.svg';
 import * as styles from './index.module.scss';
 
@@ -43,7 +44,11 @@ const TaskBoard = () => {
         </label>
       </header>
       <main>
-        <div className={styles.boards}></div>
+        <div className={styles.boards}>
+          {sortAndFilterTodos(todos, searchText).map((todo: Todo) => {
+            return <div key={todo.id}>{todo.id}</div>;
+          })}
+        </div>
       </main>
     </>
   );
