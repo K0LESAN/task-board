@@ -19,7 +19,7 @@ $root-size: 16;
 
 @mixin font($px, $leading) {
   font-size: to-rem($px);
-  line-height: percent($px, $leading);
+  line-height: percent($leading, $px);
 }
 
 @mixin ellipsis($lines: 3) {
@@ -60,12 +60,12 @@ $root-size: 16;
   @include font(14, 21);
   font-weight: 400;
   letter-spacing: -0.4px;
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 %value {
   @include font(14, 22);
   font-weight: 700;
   letter-spacing: -0.4px;
-  color: var(--secondary);
+  color: var(--primary);
 }
