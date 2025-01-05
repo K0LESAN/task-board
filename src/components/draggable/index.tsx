@@ -3,13 +3,15 @@ import { type UseDraggableArguments, useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 type Props = {
-  draggingClass?: string;
+  draggableClass?: string;
+  classNames?: string | string[];
 } & UseDraggableArguments &
   PropsWithChildren;
 
 const Draggable = ({
   children,
-  draggingClass = '',
+  draggableClass = '',
+  classNames = '',
   ...draggableArguments
 }: Props) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
@@ -20,11 +22,24 @@ const Draggable = ({
   const style: CSSProperties = {
     transform: CSS.Translate.toString(transform),
   };
+  const classes: string[] = [];
+
+  if (draggableClass && isDragging) {
+    classes.push(draggableClass);
+  }
+
+  if (classNames) {
+    if (Array.isArray(classNames)) {
+      classes.push(...classNames);
+    } else {
+      classes.push(classNames);
+    }
+  }
 
   return (
     <div
       ref={setNodeRef}
-      className={draggingClass && isDragging ? draggingClass : ''}
+      className={classes.join(' ')}
       style={style}
       {...listeners}
       {...attributes}
