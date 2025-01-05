@@ -4,4 +4,10 @@
   justify-content: space-between;
   column-gap: core.to-rem(40);
   overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
