@@ -1,11 +1,13 @@
 import { type ChangeEvent, useState, useEffect } from 'react';
 import type { Todo } from '@/types';
 import { sortAndFilterTodos } from '@/utilities/sort-and-filter-todos';
+import { useDebounce } from '@/hooks/debounce';
 import searchIcon from '@/assets/icons/search.svg';
 import * as styles from './index.module.scss';
 
 const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
+  const debouncedSearchText = useDebounce<string>(searchText, 500);
   const [todos, setTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const TaskBoard = () => {
       </header>
       <main>
         <div className={styles.boards}>
-          {sortAndFilterTodos(todos, searchText).map((todo: Todo) => {
+          {sortAndFilterTodos(todos, debouncedSearchText).map((todo: Todo) => {
             return <div key={todo.id}>{todo.id}</div>;
           })}
         </div>
