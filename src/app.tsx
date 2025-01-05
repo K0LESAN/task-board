@@ -1,5 +1,7 @@
+import DnDProvider from './providers/dnd-provider';
+
 const App = () => {
-  return <></>;
+  return <DnDProvider></DnDProvider>;
 };
 
 export default App;
