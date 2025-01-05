@@ -3,11 +3,22 @@
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
   column-gap: core.to-rem(40);
-  overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.board {
+  height: max-content;
+  transition-property: outline-color;
+  transition-duration: 250ms;
+  outline: core.to-rem(2) solid transparent;
+  border-radius: core.to-rem(4);
+}
+
+.droppable {
+  outline-color: var(--blue);
 }

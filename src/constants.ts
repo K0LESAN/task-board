@@ -14,14 +14,6 @@ enum TranlateTodoType {
   done = 'Done',
 }
 
-const ignoreTags: TagName[] = [
-  'button',
-  'input',
-  'a',
-  'input',
-  'textarea',
-  'select',
-  'option',
-];
+const ignoreTags: TagName[] = ['button', 'a', 'select', 'option'];
 
 export { ignoreTags, TodoType, TranlateTodoType };

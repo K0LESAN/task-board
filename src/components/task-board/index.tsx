@@ -1,4 +1,10 @@
 import { type ChangeEvent, useState, useEffect } from 'react';
+import {
+  type DragEndEvent,
+  type UniqueIdentifier,
+  useDndMonitor,
+} from '@dnd-kit/core';
+import { TodoType } from '@/constants';
 import type { Todo } from '@/types';
 import { sortAndFilterTodos } from '@/utilities/sort-and-filter-todos';
 import { useDebounce } from '@/hooks/debounce';
@@ -10,7 +16,7 @@ import * as styles from './index.module.scss';
 const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedSearchText = useDebounce<string>(searchText, 500);
-  const { todos, initTodos } = useTodo();
+  const { todos, initTodos, removeTodo, changeTodo } = useTodo();
 
   useEffect(() => {
     const storageTodos: string | null = localStorage.getItem('todos');
@@ -28,6 +34,32 @@ const TaskBoard = () => {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
+  useDndMonitor({
+    onDragEnd({ over, active }: DragEndEvent) {
+      if (!over) {
+        return;
+      }
+
+      const overId: UniqueIdentifier = over.id;
+      const todo: Todo = active.data.current as Todo;
+
+      if (overId === 'remove') {
+        removeTodo(todo.id);
+        return;
+      }
+
+      const type: TodoType = overId as TodoType;
+
+      if (type === todo.type) {
+        return;
+      }
+
+      changeTodo({
+        ...todo,
+        type,
+      });
+    },
+  });
 
   return (
     <>

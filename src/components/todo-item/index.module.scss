@@ -12,7 +12,6 @@
   display: flex;
   align-items: center;
   gap: core.to-rem(16);
-  cursor: pointer;
 }
 
 .label {
@@ -28,4 +27,3 @@
 .expired {
   color: var(--red);
 }
-
