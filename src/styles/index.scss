@@ -1,3 +1,9 @@
 @forward 'variables';
 @forward 'font';
 @forward 'reset';
+
+body {
+  background-image: url('../assets/images/home-background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
