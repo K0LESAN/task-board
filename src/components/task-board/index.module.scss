@@ -17,8 +17,8 @@
   border-radius: core.to-rem(20);
   border: 1px solid rgba(255, 255, 255, 0.3);
   background-color: rgba(255, 255, 255, 0.07);
-  transition-property: border-color outline-color;
   outline: core.to-rem(4) solid transparent;
+  transition-property: border-color, outline-color;
   transition-duration: 250ms;
   cursor: pointer;
 
