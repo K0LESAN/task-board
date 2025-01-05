@@ -1,0 +1,56 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: core.to-rem(58);
+}
+
+.title {
+  @extend %heading-1;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: core.to-rem(20);
+  padding: core.to-rem(8, 20);
+  border-radius: core.to-rem(20);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.07);
+  transition-property: border-color outline-color;
+  outline: core.to-rem(4) solid transparent;
+  transition-duration: 250ms;
+  cursor: pointer;
+
+  &__icon {
+    width: core.to-rem(24);
+    height: core.to-rem(24);
+    background-repeat: no-repeat;
+    background-size: contain;
+    user-select: none;
+  }
+
+  &__field {
+    @extend %label;
+    background: none;
+    outline: none;
+
+    &::placeholder {
+      @extend %label;
+      user-select: none;
+    }
+  }
+
+  @include core.effect {
+    border-color: var(--blue);
+  }
+
+  &:focus-within {
+    border-color: var(--blue);
+    outline-color: rgba(1, 132, 207, 0.5);
+  }
+}
+
+.boards {
+  display: flex;
+}
