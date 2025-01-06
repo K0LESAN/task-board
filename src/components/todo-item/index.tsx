@@ -20,6 +20,14 @@ interface TodoForm extends Pick<Todo, 'text'> {
   endDay: string;
 }
 
+type TodoError = Record<keyof TodoForm, boolean>;
+
+const initialTodoError = {
+  text: false,
+  startDay: false,
+  endDay: false,
+};
+
 const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
   const isExpired: boolean =
     type !== TodoType.done && endDay - new Date().getTime() <= 0;
@@ -29,8 +37,20 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
     startDay: formatTimestamp(startDay),
     endDay: formatTimestamp(endDay),
   });
+  const [todoError, setTodoError] = useState<TodoError>(initialTodoError);
   const { changeTodo } = useTodo();
+  const getErrorClass = (type: keyof TodoForm) =>
+    isEdit && todoError[type] ? styles.error : '';
   const editableClass: string = isEdit ? styles.value_editable : '';
+  const expiredClass: string = !isEdit && isExpired ? styles.expired : '';
+  let disabledEdit: boolean = false;
+
+  for (const typeError in todoError) {
+    if (todoError[typeError as keyof TodoError]) {
+      disabledEdit = true;
+      break;
+    }
+  }
 
   return (
     <Draggable
@@ -53,13 +73,21 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
       <label className={styles.field} htmlFor='start-day'>
         <span className={styles.label}>Начало:</span>{' '}
         <input
-          className={`${styles.value} ${editableClass}`}
+          className={`${styles.value} ${getErrorClass(
+            'startDay'
+          )} ${editableClass}`}
           type='text'
           id='start-day'
           disabled={!isEdit}
           value={isEdit ? newTodo.startDay : formatTimestamp(startDay)}
           autoComplete='off'
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            setTodoError(
+              (prev: TodoError): TodoError => ({
+                ...prev,
+                startDay: !Boolean(parseDate(event.target.value)),
+              })
+            );
             setNewTodo((prev) => ({
               ...prev,
               startDay: event.target.value,
@@ -70,15 +98,21 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
       <label className={styles.field} htmlFor='end-day'>
         <span className={styles.label}>Окончание:</span>
         <input
-          className={`${styles.value} ${editableClass} ${
-            !isEdit && isExpired ? styles.expired : ''
-          }`}
+          className={`${styles.value} ${getErrorClass(
+            'endDay'
+          )} ${editableClass} ${expiredClass}`}
           type='text'
           id='end-day'
           disabled={!isEdit}
           value={isEdit ? newTodo.endDay : formatTimestamp(endDay)}
           autoComplete='off'
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            setTodoError(
+              (prev: TodoError): TodoError => ({
+                ...prev,
+                endDay: !Boolean(parseDate(event.target.value)),
+              })
+            );
             setNewTodo((prev) => ({
               ...prev,
               endDay: event.target.value,
@@ -90,12 +124,20 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         <span className={styles.label}>Описание:</span>{' '}
         {isEdit ? (
           <input
-            className={`${styles.value} ${editableClass}`}
+            className={`${styles.value} ${getErrorClass(
+              'text'
+            )} ${editableClass}`}
             id='text'
             type='text'
             value={newTodo.text}
             autoComplete='off'
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setTodoError(
+                (prev: TodoError): TodoError => ({
+                  ...prev,
+                  text: !Boolean(event.target.value.length),
+                })
+              );
               setNewTodo((prev) => ({
                 ...prev,
                 text: event.target.value,
@@ -113,6 +155,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
               className={styles.contributor__action}
               type='button'
               onClick={() => {
+                setTodoError(initialTodoError);
                 setIsEdit(true);
               }}
             >
@@ -132,6 +175,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
                 className={styles.contributor__action}
                 type='button'
                 onClick={() => {
+                  setTodoError(initialTodoError);
                   setNewTodo({
                     text,
                     startDay: formatTimestamp(startDay),
@@ -149,7 +193,9 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
               <button
                 className={styles.contributor__action}
                 type='button'
+                disabled={disabledEdit}
                 onClick={() => {
+                  setTodoError(initialTodoError);
                   changeTodo({
                     id,
                     type,

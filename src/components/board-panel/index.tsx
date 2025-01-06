@@ -40,7 +40,7 @@ const BoardPanel = ({ type }: Props) => {
             const currentTimestamp: number = new Date().getTime();
 
             createTodo({
-              text: '',
+              text: 'Описание',
               startDay: currentTimestamp,
               endDay: currentTimestamp,
             });
