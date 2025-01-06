@@ -9,11 +9,7 @@ import * as styles from './index.module.scss';
 const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedSearchText = useDebounce<string>(searchText, 500);
-  const { todos, initTodos } = useTodo();
-
-  useEffect(() => {
-    initTodos();
-  }, []);
+  const { todos } = useTodo();
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));

@@ -18,24 +18,27 @@ export const todoContext = createContext<TodoContext>({
   createTodo() {},
   clearTodos() {},
   clearTodosByType() {},
-  initTodos() {},
   removeTodo() {},
 });
 
 const TodoProvider = ({ children }: PropsWithChildren) => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const initTodos = useCallback((): void => {
+  const [todos, setTodos] = useState<Todo[]>((): Todo[] => {
     const storageTodos: string | null = localStorage.getItem('todos');
     const parsedTodos: Todo[] = storageTodos ? JSON.parse(storageTodos) : [];
 
     if (parsedTodos.length) {
-      setTodos(parsedTodos);
+      return parsedTodos;
     } else {
       import('@/assets/tasks.json').then((importData) => {
-        setTodos(importData.default as Todo[]);
+        const newTodos: Todo[] = importData.default as Todo[];
+
+        localStorage.setItem('todos', JSON.stringify(newTodos));
+        setTodos(newTodos);
       });
     }
-  }, []);
+
+    return [];
+  });
   const createTodo = useCallback(
     (newTodo: Omit<Todo, 'id' | 'type'>): void => {
       const maxId: number = todos.reduce(
@@ -46,7 +49,7 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
       );
 
       setTodos((prev: Todo[]): Todo[] => {
-        return [
+        const newTodos = [
           ...prev,
           {
             id: maxId + 1,
@@ -54,6 +57,10 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
             ...newTodo,
           },
         ];
+
+        localStorage.setItem('todos', JSON.stringify(newTodos));
+
+        return newTodos;
       });
     },
     [todos]
@@ -65,6 +72,7 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
       });
 
       if (todos.length !== newTodos.length) {
+        localStorage.setItem('todos', JSON.stringify(newTodos));
         setTodos(newTodos);
       }
     },
@@ -72,12 +80,17 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
   );
   const changeTodo = useCallback(
     (newTodo: Todo): void => {
-      const newTodos = todos.filter(({ id: todoId }: Todo): boolean => {
-        return todoId !== newTodo.id;
-      });
+      const todosWithoutChangedTodo = todos.filter(
+        ({ id: todoId }: Todo): boolean => {
+          return todoId !== newTodo.id;
+        }
+      );
 
-      if (todos.length !== newTodos.length) {
-        setTodos([...newTodos, newTodo]);
+      if (todos.length !== todosWithoutChangedTodo.length) {
+        const newTodos = [...todosWithoutChangedTodo, newTodo];
+
+        localStorage.setItem('todos', JSON.stringify(newTodos));
+        setTodos(newTodos);
       }
     },
     [todos]
@@ -88,11 +101,14 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
         return clearType !== type;
       });
 
+      localStorage.setItem('todos', JSON.stringify(newTodos));
       setTodos(newTodos);
     },
     [todos]
   );
   const clearTodos = useCallback((): void => {
+    localStorage.setItem('todos', '[]');
+
     setTodos([]);
   }, [todos]);
   useDndMonitor({
@@ -135,7 +151,6 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
         createTodo,
         clearTodos,
         clearTodosByType,
-        initTodos,
         removeTodo,
       }}
     >
