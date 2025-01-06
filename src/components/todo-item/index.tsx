@@ -55,7 +55,6 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
   return (
     <Draggable
       key={id}
-      draggableClass={styles.draggable}
       draggableArguments={{
         id,
         disabled: isEdit,

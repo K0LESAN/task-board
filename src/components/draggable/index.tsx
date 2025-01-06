@@ -3,7 +3,6 @@ import { type UseDraggableArguments, useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 type Props<T = HTMLElement> = {
-  draggableClass?: string;
   classNames?: string | string[];
   draggableArguments: UseDraggableArguments;
 } & PropsWithChildren &
@@ -11,7 +10,6 @@ type Props<T = HTMLElement> = {
 
 const Draggable = ({
   children,
-  draggableClass = '',
   classNames = '',
   draggableArguments,
   ...htmlAttributes
@@ -22,16 +20,13 @@ const Draggable = ({
       ...draggableArguments,
       disabled: disabled !== undefined ? disabled : false,
     });
-  const dynamicGrabCursor: string = isDragging ? 'grabbing' : 'grab';
-  const style: CSSProperties = {
-    transform: CSS.Translate.toString(transform),
-    cursor: disabled ? 'initial' : dynamicGrabCursor,
-  };
+  const style: CSSProperties = isDragging
+    ? {
+        opacity: 0,
+        pointerEvents: 'none',
+      }
+    : {};
   const classes: string[] = [];
-
-  if (draggableClass && isDragging) {
-    classes.push(draggableClass);
-  }
 
   if (classNames) {
     if (Array.isArray(classNames)) {

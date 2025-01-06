@@ -8,10 +8,10 @@
   outline: core.to-rem(2) solid transparent;
   transition-property: outline-color;
   transition-duration: 250ms;
-}
 
-.draggable {
-  outline-color: var(--blue);
+  &[role='button'] {
+    cursor: grab;
+  }
 }
 
 .contributor {

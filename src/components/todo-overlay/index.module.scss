@@ -1,0 +1,9 @@
+.overlay {
+  > div {
+    outline-color: var(--blue);
+
+    &[role='button'] {
+      cursor: grabbing;
+    }
+  }
+}

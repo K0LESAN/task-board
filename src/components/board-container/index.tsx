@@ -1,9 +1,10 @@
 import type { Todo } from '@/shared/types';
 import { TodoType } from '@/shared/constants';
+import { useDndContext } from '@dnd-kit/core';
 import BoardItem from '../board-item';
 import Droppable from '../droppable';
+import TodoOverlay from '../todo-overlay';
 import * as styles from './index.module.scss';
-import { useDndContext } from '@dnd-kit/core';
 
 interface Props {
   todos: Todo[];
@@ -21,7 +22,7 @@ const BoardContainer = ({ todos }: Props) => {
   for (const todo of todos) {
     filteredTodos[todo.type].push(todo);
   }
-  console.log(active);
+
   return (
     <main className={`${styles.boards} ${active ? styles.boards_active : ''}`}>
       {Object.entries(filteredTodos).map(([type, todos]: [string, Todo[]]) => {
@@ -36,6 +37,7 @@ const BoardContainer = ({ todos }: Props) => {
           </Droppable>
         );
       })}
+      <TodoOverlay />
     </main>
   );
 };
