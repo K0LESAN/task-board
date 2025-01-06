@@ -4,4 +4,12 @@
   margin-right: auto;
   margin-left: auto;
   padding: core.to-rem(58, 40);
+
+  @media screen and (max-width: 1024px) {
+    padding: core.to-rem(44, 30);
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: core.to-rem(32, 20);
+  }
 }

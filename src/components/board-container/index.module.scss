@@ -1,8 +1,10 @@
 .boards {
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(core.to-rem(320), 1fr));
   justify-content: space-between;
   column-gap: core.to-rem(40);
+  overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
@@ -13,12 +15,12 @@
 
 .board {
   height: max-content;
-  transition-property: outline-color;
+  transition-property: border-color;
   transition-duration: 250ms;
-  outline: core.to-rem(2) solid transparent;
+  border: core.to-rem(2) solid transparent;
   border-radius: core.to-rem(4);
 }
 
 .droppable {
-  outline-color: var(--blue);
+  border-color: var(--blue);
 }
