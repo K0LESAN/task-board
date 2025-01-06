@@ -1,27 +1,31 @@
-import { type CSSProperties, type PropsWithChildren } from 'react';
+import type { HTMLAttributes, CSSProperties, PropsWithChildren } from 'react';
 import { type UseDraggableArguments, useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
-type Props = {
+type Props<T = HTMLElement> = {
   draggableClass?: string;
   classNames?: string | string[];
-} & UseDraggableArguments &
-  PropsWithChildren;
+  draggableArguments: UseDraggableArguments;
+} & PropsWithChildren &
+  HTMLAttributes<T>;
 
 const Draggable = ({
   children,
   draggableClass = '',
   classNames = '',
-  ...draggableArguments
+  draggableArguments,
+  ...htmlAttributes
 }: Props) => {
+  const { disabled } = draggableArguments;
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       ...draggableArguments,
-      disabled: false,
+      disabled: disabled !== undefined ? disabled : false,
     });
+  const dynamicGrabCursor: string = isDragging ? 'grabbing' : 'grab';
   const style: CSSProperties = {
     transform: CSS.Translate.toString(transform),
-    cursor: isDragging ? 'grabbing' : 'grab',
+    cursor: disabled ? 'initial' : dynamicGrabCursor,
   };
   const classes: string[] = [];
 
@@ -44,6 +48,7 @@ const Draggable = ({
       style={style}
       {...listeners}
       {...attributes}
+      {...htmlAttributes}
     >
       {children}
     </div>

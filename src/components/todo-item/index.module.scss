@@ -5,12 +5,48 @@
   padding: core.to-rem(16);
   border-radius: core.to-rem(4);
   background-color: var(--background-secondary);
+  outline: core.to-rem(2) solid transparent;
+  transition-property: outline-color;
+  transition-duration: 250ms;
+}
+
+.draggable {
+  outline-color: var(--blue);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  align-self: end;
+  column-gap: core.to-rem(8);
+}
+
+.edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: core.to-rem(40);
+  height: core.to-rem(40);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  transition-property: background-color;
+  transition-duration: 250ms;
+
+  @include core.effect {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &__icon {
+    width: core.to-rem(24);
+    height: core.to-rem(24);
+    object-fit: contain;
+    user-select: none;
+  }
 }
 
 .field {
-  width: max-content;
+  width: 100%;
   display: flex;
-  align-items: center;
   gap: core.to-rem(16);
 }
 
@@ -22,6 +58,21 @@
   @extend %value;
   background: none;
   outline: 1px solid transparent;
+  @include core.ellipsis(3);
+  padding-right: core.to-rem(10);
+  padding-left: core.to-rem(10);
+
+  &_editable {
+    outline-color: rgba(255, 255, 255, 0.5);
+    border-radius: core.to-rem(4);
+    caret-color: var(--blue);
+    transition-property: outline-color;
+    transition-duration: 250ms;
+
+    &:focus {
+      outline-color: var(--blue);
+    }
+  }
 }
 
 .expired {

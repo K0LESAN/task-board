@@ -9,16 +9,3 @@
   flex-direction: column;
   row-gap: core.to-rem(16);
 }
-
-.todo {
-  outline: core.to-rem(2) solid transparent;
-  border-radius: core.to-rem(4);
-  transition-property: outline-color;
-  transition-duration: 250ms;
-  outline: core.to-rem(2) solid transparent;
-  border-radius: core.to-rem(4);
-}
-
-.draggable {
-  outline-color: var(--blue);
-}

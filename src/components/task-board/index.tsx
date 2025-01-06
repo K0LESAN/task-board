@@ -29,6 +29,7 @@ const TaskBoard = () => {
             className={styles.search__field}
             id='search'
             value={searchText}
+            autoComplete='off'
             type='text'
             placeholder='поиск...'
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
