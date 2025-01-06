@@ -6,6 +6,7 @@ import { TodoType, TranlateTodoType } from '@/shared/constants';
 import { useTodo } from '@/hooks/todo';
 import SVG from '../svg';
 import TrashIcon from '../trash-icon';
+import Droppable from '../droppable';
 import * as styles from './index.module.scss';
 
 interface Props {
@@ -50,21 +51,23 @@ const BoardPanel = ({ type }: Props) => {
         </button>
       )}
       {type === TodoType.done && (
-        <button
-          type='button'
-          onClick={() => {
-            clearTodosByType(TodoType.done);
-          }}
-        >
-          <SVG
-            className={styles.trash}
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
+        <Droppable id={'remove'} droppableClass={styles.droppable}>
+          <button
+            type='button'
+            onClick={() => {
+              clearTodosByType(TodoType.done);
+            }}
           >
-            <TrashIcon />
-          </SVG>
-        </button>
+            <SVG
+              className={styles.trash}
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <TrashIcon />
+            </SVG>
+          </button>
+        </Droppable>
       )}
     </div>
   );

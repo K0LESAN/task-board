@@ -8,6 +8,7 @@ import {
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { customDragHandler } from '@/utilities/custom-drag-handler';
+import { trashCollisionDetectionAlgorithm } from '@/utilities/trash-collision';
 
 MouseSensor.activators = [
   {
@@ -31,7 +32,11 @@ const DnDProvider = ({ children }: PropsWithChildren) => {
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   return (
-    <DndContext sensors={sensors} modifiers={[restrictToWindowEdges]}>
+    <DndContext
+      collisionDetection={trashCollisionDetectionAlgorithm}
+      sensors={sensors}
+      modifiers={[restrictToWindowEdges]}
+    >
       {children}
     </DndContext>
   );

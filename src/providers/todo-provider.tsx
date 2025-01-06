@@ -109,6 +109,7 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
 
       if (overId === 'remove') {
         setTodos(newTodos);
+        return;
       }
 
       const type: TodoType = overId as TodoType;
