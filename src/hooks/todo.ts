@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import type { TodoContext } from '@/types';
+import type { TodoContext } from '@/shared/types';
 import { todoContext } from '../providers/todo-provider';
 
 export function useTodo(): TodoContext {

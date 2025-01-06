@@ -9,8 +9,8 @@ import {
   type UniqueIdentifier,
   useDndMonitor,
 } from '@dnd-kit/core';
-import type { Todo, TodoContext } from '@/types';
-import { TodoType } from '@/constants';
+import type { Todo, TodoContext } from '@/shared/types';
+import { TodoType } from '@/shared/constants';
 
 export const todoContext = createContext<TodoContext>({
   todos: [],

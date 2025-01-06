@@ -2,7 +2,7 @@ import smileImage from '@/assets/icons/smile.svg';
 import ghostImage from '@/assets/icons/ghost.svg';
 import happyImage from '@/assets/icons/happy.svg';
 import upsideDownImage from '@/assets/icons/upside-down.svg';
-import { TodoType, TranlateTodoType } from '@/constants';
+import { TodoType, TranlateTodoType } from '@/shared/constants';
 import { useTodo } from '@/hooks/todo';
 import SVG from '../svg';
 import TrashIcon from '../trash-icon';

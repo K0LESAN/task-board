@@ -1,6 +1,6 @@
 import { type ChangeEvent, useState } from 'react';
-import type { Todo } from '@/types';
-import { TodoType } from '@/constants';
+import type { Todo } from '@/shared/types';
+import { TodoType } from '@/shared/constants';
 import { formatTimestamp } from '@/utilities/format-timestamp';
 import crossIcon from '@/assets/icons/cross.svg';
 import checkIcon from '@/assets/icons/check.svg';

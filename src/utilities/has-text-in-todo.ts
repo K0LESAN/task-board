@@ -1,4 +1,4 @@
-import { Todo } from '@/types';
+import { Todo } from '@/shared/types';
 
 export function hasTextInTodo(target: string) {
   return ({ text }: Todo): boolean => {

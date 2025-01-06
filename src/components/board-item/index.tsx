@@ -1,5 +1,5 @@
-import type { Todo } from '@/types';
-import { TodoType } from '@/constants';
+import type { Todo } from '@/shared/types';
+import { TodoType } from '@/shared/constants';
 import TodoItem from '../todo-item';
 import BoardPanel from '../board-panel';
 import * as styles from './index.module.scss';

@@ -1,4 +1,4 @@
-import type { Todo } from '@/types';
+import type { Todo } from '@/shared/types';
 import { parseDate } from './parse-date';
 import { checkBetweenDate } from './check-between-date';
 import { hasTextInTodo } from './has-text-in-todo';

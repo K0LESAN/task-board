@@ -1,4 +1,4 @@
-import type { Todo } from '@/types';
+import type { Todo } from '@/shared/types';
 import { getFormattedDate } from './get-formatted-date';
 
 export function checkBetweenDate(milliseconds: number, dateString: string) {
