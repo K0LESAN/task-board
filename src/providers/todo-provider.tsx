@@ -1,11 +1,16 @@
-import type { Todo, TodoContext } from '@/types';
-import { TodoType } from '@/constants';
 import {
   type PropsWithChildren,
   createContext,
   useCallback,
   useState,
 } from 'react';
+import {
+  type DragEndEvent,
+  type UniqueIdentifier,
+  useDndMonitor,
+} from '@dnd-kit/core';
+import type { Todo, TodoContext } from '@/types';
+import { TodoType } from '@/constants';
 
 export const todoContext = createContext<TodoContext>({
   todos: [],
@@ -19,8 +24,17 @@ export const todoContext = createContext<TodoContext>({
 
 const TodoProvider = ({ children }: PropsWithChildren) => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const initTodos = useCallback((newTodos: Todo[]): void => {
-    setTodos(newTodos);
+  const initTodos = useCallback((): void => {
+    const storageTodos: string | null = localStorage.getItem('todos');
+    const parsedTodos: Todo[] = storageTodos ? JSON.parse(storageTodos) : [];
+
+    if (parsedTodos.length) {
+      setTodos(parsedTodos);
+    } else {
+      import('@/assets/tasks.json').then((importData) => {
+        setTodos(importData.default as Todo[]);
+      });
+    }
   }, []);
   const createTodo = useCallback(
     (newTodo: Omit<Todo, 'id' | 'type'>): void => {
@@ -73,7 +87,7 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
       const newTodos = todos.filter(({ type }: Todo): boolean => {
         return clearType !== type;
       });
-      console.log(todos, clearType);
+
       setTodos(newTodos);
     },
     [todos]
@@ -81,6 +95,36 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
   const clearTodos = useCallback((): void => {
     setTodos([]);
   }, [todos]);
+  useDndMonitor({
+    onDragEnd({ over, active }: DragEndEvent) {
+      if (!over) {
+        return;
+      }
+
+      const overId: UniqueIdentifier = over.id;
+      const todo: Todo = active.data.current as Todo;
+      const newTodos: Todo[] = todos.filter(({ id }: Todo) => {
+        return id !== todo.id;
+      });
+
+      if (overId === 'remove') {
+        setTodos(newTodos);
+      }
+
+      const type: TodoType = overId as TodoType;
+
+      if (type === todo.type) {
+        return;
+      }
+
+      newTodos.push({
+        ...todo,
+        type,
+      });
+
+      setTodos(newTodos);
+    },
+  });
 
   return (
     <todoContext.Provider

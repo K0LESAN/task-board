@@ -1,11 +1,4 @@
 import { type ChangeEvent, useState, useEffect } from 'react';
-import {
-  type DragEndEvent,
-  type UniqueIdentifier,
-  useDndMonitor,
-} from '@dnd-kit/core';
-import { TodoType } from '@/constants';
-import type { Todo } from '@/types';
 import { sortAndFilterTodos } from '@/utilities/sort-and-filter-todos';
 import { useDebounce } from '@/hooks/debounce';
 import { useTodo } from '@/hooks/todo';
@@ -16,50 +9,15 @@ import * as styles from './index.module.scss';
 const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedSearchText = useDebounce<string>(searchText, 500);
-  const { todos, initTodos, removeTodo, changeTodo } = useTodo();
+  const { todos, initTodos } = useTodo();
 
   useEffect(() => {
-    const storageTodos: string | null = localStorage.getItem('todos');
-    const parsedTodos: Todo[] = storageTodos ? JSON.parse(storageTodos) : [];
-
-    if (parsedTodos.length) {
-      initTodos(parsedTodos);
-    } else {
-      import('@/assets/tasks.json').then((importData): void => {
-        initTodos(importData.default as Todo[]);
-      });
-    }
+    initTodos();
   }, []);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
-  useDndMonitor({
-    onDragEnd({ over, active }: DragEndEvent) {
-      if (!over) {
-        return;
-      }
-
-      const overId: UniqueIdentifier = over.id;
-      const todo: Todo = active.data.current as Todo;
-
-      if (overId === 'remove') {
-        removeTodo(todo.id);
-        return;
-      }
-
-      const type: TodoType = overId as TodoType;
-
-      if (type === todo.type) {
-        return;
-      }
-
-      changeTodo({
-        ...todo,
-        type,
-      });
-    },
-  });
 
   return (
     <>
