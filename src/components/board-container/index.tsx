@@ -21,7 +21,7 @@ const BoardContainer = ({ todos }: Props) => {
   }
 
   return (
-    <div className={styles.boards}>
+    <main className={styles.boards}>
       {Object.entries(filteredTodos).map(([type, todos]: [string, Todo[]]) => {
         return (
           <Droppable
@@ -34,7 +34,7 @@ const BoardContainer = ({ todos }: Props) => {
           </Droppable>
         );
       })}
-    </div>
+    </main>
   );
 };
 

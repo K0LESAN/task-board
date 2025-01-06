@@ -4,53 +4,15 @@
   background-color: var(--background-primary);
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: core.to-rem(16);
-}
-
-.type {
-  display: flex;
-  align-items: center;
-  gap: core.to-rem(8);
-}
-
-.trash,
-.icon {
-  width: core.to-rem(24);
-  height: core.to-rem(24);
-  object-fit: contain;
-  user-select: none;
-}
-
-.title {
-  @extend %heading-2;
-}
-
-.add {
-  @extend %label;
-  transition-property: color;
-  transition-duration: 250ms;
-  user-select: none;
-
-  @include core.effect {
-    color: var(--blue);
-  }
-}
-
 .todos {
   display: flex;
   flex-direction: column;
   row-gap: core.to-rem(16);
 }
 
-.draggable {
-  outline: core.to-rem(2) solid var(--blue);
-  border-radius: core.to-rem(4);
-}
-
 .todo {
+  outline: core.to-rem(2) solid transparent;
+  border-radius: core.to-rem(4);
   transition-property: outline-color;
   transition-duration: 250ms;
   outline: core.to-rem(2) solid transparent;

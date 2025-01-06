@@ -1,0 +1,34 @@
+.panel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: core.to-rem(16);
+}
+
+.type {
+  display: flex;
+  align-items: center;
+  gap: core.to-rem(8);
+}
+
+.trash,
+.icon {
+  width: core.to-rem(24);
+  height: core.to-rem(24);
+  object-fit: contain;
+  user-select: none;
+}
+
+.title {
+  @extend %heading-2;
+}
+
+.add {
+  @extend %label;
+  transition-property: color;
+  transition-duration: 250ms;
+  user-select: none;
+
+  @include core.effect {
+    color: var(--blue);
+  }
+}
