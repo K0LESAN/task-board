@@ -21,6 +21,7 @@ const Draggable = ({
     });
   const style: CSSProperties = {
     transform: CSS.Translate.toString(transform),
+    cursor: isDragging ? 'grabbing' : 'grab',
   };
   const classes: string[] = [];
 
