@@ -4,12 +4,18 @@
   grid-template-columns: repeat(4, minmax(core.to-rem(320), 1fr));
   justify-content: space-between;
   column-gap: core.to-rem(40);
-  overflow-x: auto;
   scrollbar-width: none;
+  overflow-x: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media screen and (((hover: hover) and (pointer: fine)) or (min-width: 1480px)) {
+    &_active {
+      overflow-x: initial;
+    }
   }
 }
 
