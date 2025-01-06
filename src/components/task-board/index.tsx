@@ -38,11 +38,7 @@ const TaskBoard = () => {
           />
         </label>
       </header>
-      <main>
-        <BoardContainer
-          todos={sortAndFilterTodos(todos, debouncedSearchText)}
-        />
-      </main>
+      <BoardContainer todos={sortAndFilterTodos(todos, debouncedSearchText)} />
     </>
   );
 };
