@@ -1,10 +1,11 @@
-import trashIcon from '@/assets/icons/trash.svg';
 import smileImage from '@/assets/icons/smile.svg';
 import ghostImage from '@/assets/icons/ghost.svg';
 import happyImage from '@/assets/icons/happy.svg';
 import upsideDownImage from '@/assets/icons/upside-down.svg';
 import { TodoType, TranlateTodoType } from '@/constants';
 import { useTodo } from '@/hooks/todo';
+import SVG from '../svg';
+import TrashIcon from '../trash-icon';
 import * as styles from './index.module.scss';
 
 interface Props {
@@ -55,7 +56,14 @@ const BoardPanel = ({ type }: Props) => {
             clearTodosByType(TodoType.done);
           }}
         >
-          <img className={styles.trash} src={trashIcon} alt='remove' />
+          <SVG
+            className={styles.trash}
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+          >
+            <TrashIcon />
+          </SVG>
         </button>
       )}
     </div>

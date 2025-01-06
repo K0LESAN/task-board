@@ -1,14 +1,15 @@
-import { ChangeEvent, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import type { Todo } from '@/types';
 import { TodoType } from '@/constants';
 import { formatTimestamp } from '@/utilities/format-timestamp';
-import editIcon from '@/assets/icons/edit.svg';
 import crossIcon from '@/assets/icons/cross.svg';
 import checkIcon from '@/assets/icons/check.svg';
-import Draggable from '../draggable';
-import * as styles from './index.module.scss';
 import { useTodo } from '@/hooks/todo';
 import { parseDate } from '@/utilities/parse-date';
+import Draggable from '../draggable';
+import SVG from '../svg';
+import EditIcon from '../edit-icon';
+import * as styles from './index.module.scss';
 
 interface Props {
   todo: Todo;
@@ -106,22 +107,29 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         )}
       </label>
       {type === TodoType.todo && (
-        <div className={styles.buttons}>
+        <div className={styles.contributor}>
           {!isEdit && (
             <button
-              className={styles.edit}
+              className={styles.contributor__action}
               type='button'
               onClick={() => {
                 setIsEdit(true);
               }}
             >
-              <img className={styles.edit__icon} src={editIcon} alt='edit' />
+              <SVG
+                className={`${styles.contributor__icon} ${styles.contributor__icon_edit}`}
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+              >
+                <EditIcon />
+              </SVG>
             </button>
           )}
           {isEdit && (
             <>
               <button
-                className={styles.edit}
+                className={styles.contributor__action}
                 type='button'
                 onClick={() => {
                   setNewTodo({
@@ -133,13 +141,13 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
                 }}
               >
                 <img
-                  className={styles.edit__icon}
+                  className={styles.contributor__icon}
                   src={crossIcon}
                   alt='cancel'
                 />
               </button>
               <button
-                className={styles.edit}
+                className={styles.contributor__action}
                 type='button'
                 onClick={() => {
                   changeTodo({
@@ -152,7 +160,11 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
                   setIsEdit(false);
                 }}
               >
-                <img className={styles.edit__icon} src={checkIcon} alt='add' />
+                <img
+                  className={styles.contributor__icon}
+                  src={checkIcon}
+                  alt='add'
+                />
               </button>
             </>
           )}

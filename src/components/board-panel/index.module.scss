@@ -22,6 +22,18 @@
   @extend %heading-2;
 }
 
+.trash {
+  fill: white;
+  fill-opacity: 0.8;
+  transition-property: fill, fill-opacity;
+  transition-duration: 250ms;
+
+  @include core.effect {
+    fill: var(--blue);
+    fill-opacity: 1;
+  }
+}
+
 .add {
   @extend %label;
   transition-property: color;
