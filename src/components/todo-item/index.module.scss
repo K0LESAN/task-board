@@ -52,42 +52,6 @@
   }
 }
 
-.field {
-  width: 100%;
-  display: flex;
-  gap: core.to-rem(16);
-}
-
-.label {
-  @extend %label;
-}
-
-.value {
-  @extend %value;
-  width: 100%;
-  background: none;
-  outline: 1px solid transparent;
-  @include core.ellipsis(3);
-  padding-right: core.to-rem(10);
-  padding-left: core.to-rem(10);
-
-  &:where(input):not(:disabled) {
-    outline-color: rgba(255, 255, 255, 0.5);
-    border-radius: core.to-rem(4);
-    caret-color: var(--blue);
-    transition-property: outline-color;
-    transition-duration: 250ms;
-
-    &.error {
-      outline-color: var(--red);
-    }
-
-    &:focus {
-      outline-color: var(--blue);
-    }
-  }
-}
-
-.expired {
+input.expired {
   color: var(--red);
 }

@@ -1,0 +1,60 @@
+.field {
+  width: 100%;
+  min-height: core.to-rem(24);
+  display: flex;
+  gap: core.to-rem(16);
+}
+
+.label {
+  @extend %label;
+}
+
+.text ~ .value:disabled {
+  display: none;
+}
+
+.wrapper:has(.value:not(:disabled)) > .text {
+  display: none;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-right: core.to-rem(10);
+  padding-left: core.to-rem(10);
+  outline: 1px solid transparent;
+  border-radius: core.to-rem(4);
+  transition-property: outline-color;
+  transition-duration: 250ms;
+
+  &:has(.value:not(:disabled)) {
+    outline-color: rgba(255, 255, 255, 0.5);
+
+    &.error {
+      outline-color: var(--red);
+    }
+
+    &:focus-within {
+      outline-color: var(--blue);
+    }
+  }
+}
+
+.text,
+.value {
+  display: block;
+  @extend %value;
+  width: 100%;
+}
+
+.text {
+  @include core.ellipsis(3);
+}
+
+.value {
+  caret-color: var(--blue);
+  background: none;
+  outline: 1px solid transparent;
+}
