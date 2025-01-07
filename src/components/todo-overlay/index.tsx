@@ -21,7 +21,7 @@ const TodoOverlay = () => {
 
   return (
     <DragOverlay className={styles.overlay}>
-      {activeTodo ? <TodoItem todo={activeTodo} /> : null}
+      {activeTodo && <TodoItem todo={activeTodo} />}
     </DragOverlay>
   );
 };

@@ -48,8 +48,10 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
           text,
         },
       }}
+      tagName={'form'}
       classNames={styles.todo}
       title={text}
+      data-disabled={!isEdit}
     >
       <TodoField
         labelText='Начало:'
