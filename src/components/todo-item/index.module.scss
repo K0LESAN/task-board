@@ -9,7 +9,11 @@
   transition-property: outline-color;
   transition-duration: 250ms;
 
-  &[role='button'] {
+  &[data-disabled='false'] {
+    cursor: initial;
+  }
+
+  &[data-disabled='true'] {
     cursor: grab;
   }
 }
