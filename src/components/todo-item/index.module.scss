@@ -7,7 +7,7 @@
   background-color: var(--background-secondary);
   outline: core.to-rem(2) solid transparent;
   transition-property: outline-color;
-  transition-duration: 250ms;
+  transition-duration: 2000ms;
 
   &[data-disabled='false'] {
     cursor: initial;
@@ -15,44 +15,6 @@
 
   &[data-disabled='true'] {
     cursor: grab;
-  }
-}
-
-.contributor {
-  display: flex;
-  align-items: center;
-  align-self: end;
-  column-gap: core.to-rem(8);
-  --edit-fill: white;
-
-  &__action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: core.to-rem(40);
-    height: core.to-rem(40);
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.08);
-    transition-property: background-color;
-    transition-duration: 250ms;
-
-    @include core.effect {
-      background-color: rgba(255, 255, 255, 0.2);
-      --edit-fill: var(--blue);
-    }
-  }
-
-  &__icon {
-    width: core.to-rem(24);
-    height: core.to-rem(24);
-    object-fit: contain;
-    user-select: none;
-
-    &_edit {
-      transition-property: fill;
-      transition-duration: 250ms;
-      fill: var(--edit-fill);
-    }
   }
 }
 

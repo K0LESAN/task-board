@@ -1,0 +1,16 @@
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: core.to-rem(40);
+  height: core.to-rem(40);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  transition-property: background-color;
+  transition-duration: 250ms;
+
+  @include core.effect {
+    background-color: rgba(255, 255, 255, 0.2);
+    --edit-fill: var(--blue);
+  }
+}
