@@ -18,13 +18,18 @@ const BoardContainer = ({ todos }: Props) => {
     [TodoType.done]: [],
   };
   const { active } = useDndContext();
+  const classes = [styles.boards];
 
   for (const todo of todos) {
     filteredTodos[todo.type].push(todo);
   }
 
+  if (active) {
+    classes.push(styles.boards_active);
+  }
+
   return (
-    <main className={`${styles.boards} ${active ? styles.boards_active : ''}`}>
+    <main className={classes.join(' ')}>
       {Object.entries(filteredTodos).map(([type, todos]: [string, Todo[]]) => {
         return (
           <Droppable
