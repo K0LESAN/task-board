@@ -4,11 +4,6 @@ import {
   useCallback,
   useState,
 } from 'react';
-import {
-  type DragEndEvent,
-  type UniqueIdentifier,
-  useDndMonitor,
-} from '@dnd-kit/core';
 import type { Todo, TodoContext } from '@/shared/types';
 import { TodoType } from '@/shared/constants';
 
@@ -111,37 +106,6 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
 
     setTodos([]);
   }, [todos]);
-  useDndMonitor({
-    onDragEnd({ over, active }: DragEndEvent) {
-      if (!over) {
-        return;
-      }
-
-      const overId: UniqueIdentifier = over.id;
-      const todo: Todo = active.data.current as Todo;
-      const newTodos: Todo[] = todos.filter(({ id }: Todo) => {
-        return id !== todo.id;
-      });
-
-      if (overId === 'remove') {
-        setTodos(newTodos);
-        return;
-      }
-
-      const type: TodoType = overId as TodoType;
-
-      if (type === todo.type) {
-        return;
-      }
-
-      newTodos.push({
-        ...todo,
-        type,
-      });
-
-      setTodos(newTodos);
-    },
-  });
 
   return (
     <todoContext.Provider
