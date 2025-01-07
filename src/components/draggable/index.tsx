@@ -1,52 +1,55 @@
-import type { HTMLAttributes, CSSProperties, PropsWithChildren } from 'react';
+import {
+  type HTMLAttributes,
+  type CSSProperties,
+  type PropsWithChildren,
+  type ElementType,
+  createElement,
+} from 'react';
 import { type UseDraggableArguments, useDraggable } from '@dnd-kit/core';
-import { CSS } from '@dnd-kit/utilities';
 
 type Props<T = HTMLElement> = {
   classNames?: string | string[];
   draggableArguments: UseDraggableArguments;
+  tagName?: ElementType;
 } & PropsWithChildren &
-  HTMLAttributes<T>;
+  Omit<HTMLAttributes<T>, 'className'>;
 
 const Draggable = ({
-  children,
-  classNames = '',
   draggableArguments,
+  style: argStyle = {},
+  classNames = '',
+  children,
+  tagName,
   ...htmlAttributes
 }: Props) => {
-  const { disabled } = draggableArguments;
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({
-      ...draggableArguments,
-      disabled: disabled !== undefined ? disabled : false,
-    });
+  const {
+    setNodeRef: ref,
+    attributes,
+    listeners,
+    isDragging,
+  } = useDraggable(draggableArguments);
   const style: CSSProperties = isDragging
     ? {
+        ...argStyle,
         opacity: 0,
         pointerEvents: 'none',
       }
-    : {};
-  const classes: string[] = [];
+    : argStyle;
+  const className: string = Array.isArray(classNames)
+    ? classNames.join(' ')
+    : classNames;
 
-  if (classNames) {
-    if (Array.isArray(classNames)) {
-      classes.push(...classNames);
-    } else {
-      classes.push(classNames);
-    }
-  }
-
-  return (
-    <div
-      ref={setNodeRef}
-      className={classes.join(' ')}
-      style={style}
-      {...listeners}
-      {...attributes}
-      {...htmlAttributes}
-    >
-      {children}
-    </div>
+  return createElement(
+    tagName || 'div',
+    {
+      ref,
+      className,
+      style,
+      ...listeners,
+      ...attributes,
+      ...htmlAttributes,
+    },
+    children
   );
 };
 
