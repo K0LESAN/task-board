@@ -41,7 +41,6 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
   const { changeTodo } = useTodo();
   const getErrorClass = (type: keyof TodoForm) =>
     isEdit && todoError[type] ? styles.error : '';
-  const editableClass: string = isEdit ? styles.value_editable : '';
   const expiredClass: string = !isEdit && isExpired ? styles.expired : '';
   let disabledEdit: boolean = false;
 
@@ -72,9 +71,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
       <label className={styles.field} htmlFor='start-day'>
         <span className={styles.label}>Начало:</span>{' '}
         <input
-          className={`${styles.value} ${getErrorClass(
-            'startDay'
-          )} ${editableClass}`}
+          className={`${styles.value} ${getErrorClass('startDay')}`}
           type='text'
           id='start-day'
           disabled={!isEdit}
@@ -99,7 +96,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         <input
           className={`${styles.value} ${getErrorClass(
             'endDay'
-          )} ${editableClass} ${expiredClass}`}
+          )} ${expiredClass}`}
           type='text'
           id='end-day'
           disabled={!isEdit}
@@ -123,9 +120,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         <span className={styles.label}>Описание:</span>{' '}
         {isEdit ? (
           <input
-            className={`${styles.value} ${getErrorClass(
-              'text'
-            )} ${editableClass}`}
+            className={`${styles.value} ${getErrorClass('text')}`}
             id='text'
             type='text'
             value={newTodo.text}

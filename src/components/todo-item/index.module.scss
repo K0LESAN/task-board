@@ -71,12 +71,16 @@
   padding-right: core.to-rem(10);
   padding-left: core.to-rem(10);
 
-  &_editable {
+  &:where(input):not(:disabled) {
     outline-color: rgba(255, 255, 255, 0.5);
     border-radius: core.to-rem(4);
     caret-color: var(--blue);
     transition-property: outline-color;
     transition-duration: 250ms;
+
+    &.error {
+      outline-color: var(--red);
+    }
 
     &:focus {
       outline-color: var(--blue);
@@ -86,8 +90,4 @@
 
 .expired {
   color: var(--red);
-}
-
-.error {
-  outline-color: var(--red);
 }
