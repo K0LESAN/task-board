@@ -7,7 +7,7 @@ export function sortAndFilterTodos(todos: Todo[], searchText: string): Todo[] {
   const milliseconds: number = parseDate(searchText);
   const filterFunction = Number.isNaN(milliseconds)
     ? hasTextInTodo(searchText)
-    : checkBetweenDate(milliseconds, searchText);
+    : checkBetweenDate(searchText);
 
   return todos
     .filter(filterFunction)
