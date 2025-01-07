@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 let mode = 'development';
 
@@ -23,22 +23,22 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
       '@': path.resolve(__dirname, 'src/'),
-    }
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'index.html')
+      template: path.join(__dirname, 'index.html'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
-    })
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: '/node_modules/'
+        exclude: '/node_modules/',
       },
       {
         test: /\.(s[ac]|c)ss$/i,
@@ -49,28 +49,33 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              additionalData: `@use '${path.join(__dirname, 'src', 'styles', 'core')}' as core;`,
+              additionalData: `@use '${path.join(
+                __dirname,
+                'src',
+                'styles',
+                'core'
+              )}' as core;`,
             },
-          }
+          },
         ],
       },
       {
         test: /\.(png|jpe?g|webp|svg|ttf)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
     ],
   },
   optimization: {
     minimizer: [
-      "...",
+      '...',
       new ImageMinimizerPlugin({
         minimizer: {
           implementation: ImageMinimizerPlugin.imageminMinify,
           options: {
             plugins: [
-              ["gifsicle", { interlaced: true }],
-              ["jpegtran", { progressive: true }],
-              ["optipng", { optimizationLevel: 5 }],
+              ['gifsicle', { interlaced: true }],
+              ['jpegtran', { progressive: true }],
+              ['optipng', { optimizationLevel: 5 }],
             ],
           },
         },
@@ -79,6 +84,6 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
-  }
-}
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
