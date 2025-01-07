@@ -11,6 +11,7 @@ import { useTodo } from '@/hooks/todo';
 import searchIcon from '@/assets/icons/search.svg';
 import { TodoType } from '@/shared/constants';
 import BoardContainer from '../board-container';
+import Container from '../container';
 import * as styles from './index.module.scss';
 
 const TaskBoard = () => {
@@ -47,7 +48,7 @@ const TaskBoard = () => {
   }, [todos]);
 
   return (
-    <>
+    <Container>
       <header className={styles.header}>
         <h1 className={styles.title}>Your tasks</h1>
         <label className={styles.search} htmlFor='search'>
@@ -66,7 +67,7 @@ const TaskBoard = () => {
         </label>
       </header>
       <BoardContainer todos={sortAndFilterTodos(todos, debouncedSearchText)} />
-    </>
+    </Container>
   );
 };
 
