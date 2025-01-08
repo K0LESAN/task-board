@@ -28,13 +28,18 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
     startDay: formatTimestamp(startDay),
     endDay: formatTimestamp(endDay),
   };
+  const [newTodo, setNewTodo] = useState<TodoForm>(initialTodoForm);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const { changeTodo } = useTodo();
   const isExpired: boolean =
     type !== TodoType.done && endDay - new Date().getTime() <= 0;
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [newTodo, setNewTodo] = useState<TodoForm>(initialTodoForm);
-  const { changeTodo } = useTodo();
   const expiredClass: string = !isEdit && isExpired ? styles.expired : '';
   const validDate = (date: string): boolean => Boolean(parseDate(date));
+  const {
+    text: newText,
+    startDay: newStartDay,
+    endDay: newEndDay,
+  }: TodoForm = newTodo;
 
   return (
     <Draggable
@@ -58,9 +63,9 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         event.preventDefault();
 
         if (
-          !validDate(newTodo.startDay) ||
-          !validDate(newTodo.endDay) ||
-          !newTodo.text.length
+          !validDate(newStartDay) ||
+          !validDate(newEndDay) ||
+          !newText.length
         ) {
           return;
         }
@@ -69,9 +74,9 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         changeTodo({
           id,
           type,
-          text: newTodo.text,
-          startDay: parseDate(newTodo.startDay),
-          endDay: parseDate(newTodo.endDay),
+          text: newText,
+          startDay: parseDate(newStartDay),
+          endDay: parseDate(newEndDay),
         });
       }}
     >
@@ -79,9 +84,9 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         labelText='Начало:'
         autoComplete='off'
         disabled={!isEdit}
-        value={newTodo.startDay}
+        value={newStartDay}
         placeholder='dd.mm.yyyy'
-        validate={() => validDate(newTodo.startDay)}
+        validate={() => validDate(newStartDay)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setNewTodo(
             (prev: TodoForm): TodoForm => ({
@@ -96,9 +101,9 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         autoComplete='off'
         disabled={!isEdit}
         className={expiredClass}
-        value={newTodo.endDay}
+        value={newEndDay}
         placeholder='dd.mm.yyyy'
-        validate={() => validDate(newTodo.endDay)}
+        validate={() => validDate(newEndDay)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setNewTodo(
             (prev: TodoForm): TodoForm => ({
@@ -112,10 +117,10 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         labelText='Описание:'
         autoComplete='off'
         disabled={!isEdit}
-        value={newTodo.text}
+        value={newText}
         placeholder='описание...'
         disabledText={text}
-        validate={() => newTodo.text.length > 0}
+        validate={() => newText.length > 0}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setNewTodo(
             (prev: TodoForm): TodoForm => ({
