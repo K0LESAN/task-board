@@ -57,4 +57,6 @@
   caret-color: var(--blue);
   background: none;
   outline: 1px solid transparent;
+  transition-property: color;
+  transition-duration: 250ms;
 }
