@@ -4,17 +4,35 @@
   grid-template-columns: repeat(4, minmax(core.to-rem(320), 1fr));
   justify-content: space-between;
   column-gap: core.to-rem(40);
-  scrollbar-width: none;
   overflow-x: auto;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
 
-  &::-webkit-scrollbar {
-    display: none;
+  @media screen and not (((hover: hover) and (pointer: fine)) or (min-width: 1480px)) {
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   @media screen and (((hover: hover) and (pointer: fine)) or (min-width: 1480px)) {
-    &_active {
-      overflow-x: initial;
+    &::-webkit-scrollbar {
+      height: core.to-rem(5);
+      padding: core.to-rem(20);
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: rgba(255, 255, 255, 0.07);
+      border-radius: core.to-rem(20);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--background-primary);
+      border-radius: core.to-rem(20);
+      cursor: pointer;
+
+      @include core.effect {
+        background-color: var(--blue);
+      }
     }
   }
 }

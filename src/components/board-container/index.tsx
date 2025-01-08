@@ -17,15 +17,10 @@ const BoardContainer = ({ todos }: Props) => {
     [TodoType.review]: [],
     [TodoType.done]: [],
   };
-  const { active } = useDndContext();
   const classes = [styles.boards];
 
   for (const todo of todos) {
     filteredTodos[todo.type].push(todo);
-  }
-
-  if (active) {
-    classes.push(styles.boards_active);
   }
 
   return (
