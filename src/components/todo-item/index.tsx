@@ -35,6 +35,8 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
     type !== TodoType.done && endDay - new Date().getTime() <= 0;
   const expiredClass: string = !isEdit && isExpired ? styles.expired : '';
   const validDate = (date: string): boolean => Boolean(parseDate(date));
+  const validTodoForm = (): boolean =>
+    validDate(newStartDay) && validDate(newEndDay) && newText.length > 0;
   const {
     text: newText,
     startDay: newStartDay,
@@ -62,11 +64,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
       onSubmit={(event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (
-          !validDate(newStartDay) ||
-          !validDate(newEndDay) ||
-          !newText.length
-        ) {
+        if (!validTodoForm()) {
           return;
         }
 
@@ -146,6 +144,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
             />
           </ContributorAction>
           <ContributorAction
+            disabled={!validTodoForm()}
             className={!isEdit ? styles.hide : ''}
             type='submit'
           >
