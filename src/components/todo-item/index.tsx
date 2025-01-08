@@ -80,6 +80,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         autoComplete='off'
         disabled={!isEdit}
         value={newTodo.startDay}
+        placeholder='dd.mm.yyyy'
         validate={() => validDate(newTodo.startDay)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setNewTodo(
@@ -96,6 +97,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         disabled={!isEdit}
         className={expiredClass}
         value={newTodo.endDay}
+        placeholder='dd.mm.yyyy'
         validate={() => validDate(newTodo.endDay)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setNewTodo(
@@ -111,6 +113,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         autoComplete='off'
         disabled={!isEdit}
         value={newTodo.text}
+        placeholder='описание...'
         disabledText={text}
         validate={() => newTodo.text.length > 0}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
