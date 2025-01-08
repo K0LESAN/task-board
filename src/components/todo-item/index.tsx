@@ -124,45 +124,45 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
       />
       {type === TodoType.todo && (
         <div className={styles.contributor}>
-          {isEdit ? (
-            <>
-              <ContributorAction
-                onClick={() => {
-                  setNewTodo(initialTodoForm);
-                  setIsEdit(false);
-                }}
-              >
-                <img
-                  className={styles.contributor__icon}
-                  src={crossIcon}
-                  alt='cancel'
-                />
-              </ContributorAction>
-              <ContributorAction type='submit'>
-                <img
-                  className={styles.contributor__icon}
-                  src={checkIcon}
-                  alt='add'
-                />
-              </ContributorAction>
-            </>
-          ) : (
-            <ContributorAction
-              onClick={() => {
-                setNewTodo(initialTodoForm);
-                setIsEdit(true);
-              }}
+          <ContributorAction
+            className={!isEdit ? styles.hide : ''}
+            onClick={() => {
+              setNewTodo(initialTodoForm);
+              setIsEdit(false);
+            }}
+          >
+            <img
+              className={styles.contributor__icon}
+              src={crossIcon}
+              alt='cancel'
+            />
+          </ContributorAction>
+          <ContributorAction
+            className={!isEdit ? styles.hide : ''}
+            type='submit'
+          >
+            <img
+              className={styles.contributor__icon}
+              src={checkIcon}
+              alt='add'
+            />
+          </ContributorAction>
+          <ContributorAction
+            className={isEdit ? styles.hide : ''}
+            onClick={() => {
+              setNewTodo(initialTodoForm);
+              setIsEdit(true);
+            }}
+          >
+            <SVG
+              className={styles.contributor__icon}
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
             >
-              <SVG
-                className={styles.contributor__icon}
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-              >
-                <EditIcon />
-              </SVG>
-            </ContributorAction>
-          )}
+              <EditIcon />
+            </SVG>
+          </ContributorAction>
         </div>
       )}
     </Draggable>
