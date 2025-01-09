@@ -19,4 +19,8 @@ interface TodoContext {
 
 type TagName = keyof HTMLElementTagNameMap;
 
-export type { TagName, Todo, TodoContext };
+type DefaultLanguage = 'ru';
+
+type Languages = DefaultLanguage | 'en';
+
+export type { TagName, Todo, TodoContext, DefaultLanguage, Languages };

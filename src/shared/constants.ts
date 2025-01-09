@@ -1,4 +1,4 @@
-import type { TagName } from './types';
+import type { DefaultLanguage, Languages, TagName } from './types';
 
 enum TodoType {
   todo = 'todo',
@@ -23,4 +23,8 @@ const ignoreTags: TagName[] = [
   'input',
 ];
 
-export { ignoreTags, TodoType, TranlateTodoType };
+const defaultLanguage: DefaultLanguage = 'ru';
+
+const languages: Languages[] = [defaultLanguage, 'en'];
+
+export { ignoreTags, TodoType, TranlateTodoType, defaultLanguage, languages };
