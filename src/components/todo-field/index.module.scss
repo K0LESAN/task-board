@@ -37,6 +37,10 @@
       outline-color: var(--red);
     }
 
+    @include core.effect {
+      outline-color: var(--blue);
+    }
+
     &:focus-within {
       outline-color: var(--blue);
     }
