@@ -1,1 +1,16 @@
-{}
+{
+  "yourTasks": "Your tasks",
+  "searchIconAlt": "search",
+  "search": "search...",
+  "add": "+ Add task",
+  "description": "Description",
+  "dateFrom": "Date from",
+  "dateTo": "Date to",
+  "cancel": "cancel",
+  "addAlt": "add",
+  "todo": "To Do",
+  "in_progress": "In Progress",
+  "review": "Review",
+  "done": "Done",
+  "datePlaceholder": "dd.mm.yyyy"
+}

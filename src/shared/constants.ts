@@ -7,13 +7,6 @@ enum TodoType {
   done = 'done',
 }
 
-enum TranlateTodoType {
-  todo = 'To Do',
-  in_progress = 'In Progress',
-  review = 'Review',
-  done = 'Done',
-}
-
 const ignoreTags: TagName[] = [
   'button',
   'a',
@@ -27,4 +20,4 @@ const defaultLanguage: DefaultLanguage = 'ru';
 
 const languages: Languages[] = [defaultLanguage, 'en'];
 
-export { ignoreTags, TodoType, TranlateTodoType, defaultLanguage, languages };
+export { ignoreTags, TodoType, defaultLanguage, languages };

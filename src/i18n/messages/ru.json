@@ -1,1 +1,16 @@
-{}
+{
+  "yourTasks": "Ваши задачи",
+  "searchIconAlt": "поиск",
+  "search": "поиск...",
+  "add": "+ Добавить",
+  "description": "Описание",
+  "dateFrom": "Начало",
+  "dateTo": "Окончание",
+  "cancel": "отмена",
+  "addAlt": "добавить",
+  "todo": "Новое",
+  "in_progress": "В работе",
+  "review": "Ревью",
+  "done": "Закрыто",
+  "datePlaceholder": "дд.мм.гггг"
+}

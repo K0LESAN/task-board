@@ -1,4 +1,5 @@
 import { type ChangeEvent, type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Todo } from '@/shared/types';
 import crossIcon from '@/assets/icons/cross.svg';
 import checkIcon from '@/assets/icons/check.svg';
@@ -31,6 +32,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
   const [newTodo, setNewTodo] = useState<TodoForm>(initialTodoForm);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const { changeTodo } = useTodo();
+  const { t } = useTranslation();
   const isExpired: boolean =
     type !== TodoType.done && endDay - new Date().getTime() <= 0;
   const expiredClass: string = !isEdit && isExpired ? styles.expired : '';
@@ -79,7 +81,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
       }}
     >
       <TodoField
-        labelText='Начало:'
+        labelText={`${t('dateFrom')}:`}
         autoComplete='off'
         disabled={!isEdit}
         value={newStartDay}
@@ -95,12 +97,12 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         }}
       />
       <TodoField
-        labelText='Окончание:'
+        labelText={`${t('dateTo')}:`}
         autoComplete='off'
         disabled={!isEdit}
         className={expiredClass}
         value={newEndDay}
-        placeholder='dd.mm.yyyy'
+        placeholder={t('datePlaceholder')}
         validate={() => validDate(newEndDay)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setNewTodo(
@@ -112,11 +114,11 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         }}
       />
       <TodoField
-        labelText='Описание:'
+        labelText={`${t('description')}:`}
         autoComplete='off'
         disabled={!isEdit}
         value={newText}
-        placeholder='описание...'
+        placeholder={`${t('description')}...`.toLowerCase()}
         disabledText={text}
         validate={() => newText.length > 0}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -140,7 +142,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
             <img
               className={styles.contributor__icon}
               src={crossIcon}
-              alt='cancel'
+              alt={t('cancel')}
             />
           </ContributorAction>
           <ContributorAction
@@ -151,7 +153,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
             <img
               className={styles.contributor__icon}
               src={checkIcon}
-              alt='add'
+              alt={t('addAlt')}
             />
           </ContributorAction>
           <ContributorAction

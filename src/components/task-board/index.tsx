@@ -4,6 +4,7 @@ import {
   type UniqueIdentifier,
   useDndMonitor,
 } from '@dnd-kit/core';
+import { useTranslation } from 'react-i18next';
 import type { Todo } from '@/shared/types';
 import { sortAndFilterTodos } from '@/utilities/sort-and-filter-todos';
 import { useDebounce } from '@/hooks/debounce';
@@ -18,6 +19,7 @@ const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedSearchText = useDebounce<string>(searchText, 500);
   const { todos, changeTodo, removeTodo } = useTodo();
+  const { t } = useTranslation();
 
   useDndMonitor({
     onDragEnd({ over, active }: DragEndEvent) {
@@ -50,16 +52,20 @@ const TaskBoard = () => {
   return (
     <Container>
       <header className={styles.header}>
-        <h1 className={styles.title}>Your tasks</h1>
+        <h1 className={styles.title}>{t('yourTasks')}</h1>
         <label className={styles.search} htmlFor='search'>
-          <img className={styles.search__icon} src={searchIcon} alt='search' />
+          <img
+            className={styles.search__icon}
+            src={searchIcon}
+            alt={t('searchIconAlt')}
+          />
           <input
             className={styles.search__field}
             id='search'
             value={searchText}
             autoComplete='off'
             type='text'
-            placeholder='поиск...'
+            placeholder={t('search')}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               setSearchText(event.target.value.trimStart());
             }}
