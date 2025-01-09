@@ -13,13 +13,14 @@ import searchIcon from '@/assets/icons/search.svg';
 import { TodoType } from '@/shared/constants';
 import BoardContainer from '../board-container';
 import Container from '../container';
+import LanguageSwitch from '../language-switch';
 import * as styles from './index.module.scss';
 
 const TaskBoard = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedSearchText = useDebounce<string>(searchText, 500);
   const { todos, changeTodo, removeTodo } = useTodo();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useDndMonitor({
     onDragEnd({ over, active }: DragEndEvent) {
@@ -73,6 +74,7 @@ const TaskBoard = () => {
         </label>
       </header>
       <BoardContainer todos={sortAndFilterTodos(todos, debouncedSearchText)} />
+      <LanguageSwitch />
     </Container>
   );
 };

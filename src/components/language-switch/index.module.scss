@@ -1,0 +1,19 @@
+.switcher {
+  @extend %label;
+  @include core.font(18, 21);
+  position: absolute;
+  top: core.to-rem(20);
+  right: core.to-rem(40);
+  transition-property: color;
+  transition-duration: 250ms;
+  z-index: 100;
+
+  @include core.effect {
+    color: var(--blue);
+  }
+
+  @media screen and (max-width: 1024px) {
+    top: core.to-rem(5);
+    right: core.to-rem(20);
+  }
+}
