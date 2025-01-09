@@ -12,10 +12,7 @@
 
 .trash,
 .icon {
-  width: core.to-rem(24);
-  height: core.to-rem(24);
-  object-fit: contain;
-  user-select: none;
+  @extend %icon;
 }
 
 .title {

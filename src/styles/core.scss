@@ -69,3 +69,10 @@ $root-size: 16;
   letter-spacing: -0.4px;
   color: var(--primary);
 }
+
+%icon {
+  width: to-rem(24);
+  height: to-rem(24);
+  object-fit: contain;
+  user-select: none;
+}

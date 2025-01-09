@@ -26,10 +26,7 @@
   --edit-fill: white;
 
   &__icon {
-    width: core.to-rem(24);
-    height: core.to-rem(24);
-    object-fit: contain;
-    user-select: none;
+    @extend %icon;
     transition-property: fill;
     transition-duration: 250ms;
     fill: var(--edit-fill);
