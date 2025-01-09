@@ -85,7 +85,7 @@ const TodoItem = ({ todo: { id, type, startDay, endDay, text } }: Props) => {
         autoComplete='off'
         disabled={!isEdit}
         value={newStartDay}
-        placeholder='dd.mm.yyyy'
+        placeholder={t('datePlaceholder')}
         validate={() => validDate(newStartDay)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setNewTodo(
