@@ -7,14 +7,7 @@ enum TodoType {
   done = 'done',
 }
 
-const ignoreTags: TagName[] = [
-  'button',
-  'a',
-  'select',
-  'option',
-  'label',
-  'input',
-];
+const ignoreTags: TagName[] = ['button', 'a'];
 
 const defaultLanguage: DefaultLanguage = 'ru';
 
