@@ -18,8 +18,8 @@ const BoardItem = ({ todos, type }: Props) => {
       </Suspense>
       <div className={styles.todos}>
         {todos.map((todo: Todo) => (
-          <Suspense>
-            <TodoItem key={todo.id} todo={todo} />
+          <Suspense key={todo.id}>
+            <TodoItem todo={todo} />
           </Suspense>
         ))}
       </div>
