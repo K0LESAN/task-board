@@ -27,13 +27,10 @@ const BoardContainer = ({ todos }: Props) => {
     <main className={classes.join(' ')}>
       {Object.entries(filteredTodos).map(([type, todos]: [string, Todo[]]) => {
         return (
-          <Droppable
-            key={type}
-            id={type}
-            classNames={styles.board}
-            droppableClass={styles.droppable}
-          >
-            <BoardItem todos={todos} type={type as TodoType} />
+          <Droppable key={type} id={type} droppableClass={styles.droppable}>
+            <div className={styles.board}>
+              <BoardItem todos={todos} type={type as TodoType} />
+            </div>
           </Droppable>
         );
       })}
