@@ -2,6 +2,11 @@
   padding: core.to-rem(32, 16);
   border-radius: core.to-rem(4);
   background-color: var(--background-primary);
+  transition-property: border-color;
+  transition-duration: 250ms;
+  border: core.to-rem(2) solid transparent;
+  border-radius: core.to-rem(4);
+  margin-right: core.to-rem(5);
 }
 
 .todos {

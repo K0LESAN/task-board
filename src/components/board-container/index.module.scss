@@ -40,11 +40,6 @@
   max-height: 75vh;
   height: min-content;
   overflow-y: auto;
-  transition-property: border-color;
-  transition-duration: 250ms;
-  border: core.to-rem(2) solid transparent;
-  border-radius: core.to-rem(4);
-  margin-right: core.to-rem(5);
 
   &::-webkit-scrollbar {
     height: core.to-rem(5);
@@ -69,6 +64,8 @@
 
 .droppable {
   > .board {
-    border-color: var(--blue);
+    > * {
+      border-color: var(--blue);
+    }
   }
 }
