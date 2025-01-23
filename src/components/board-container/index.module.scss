@@ -1,5 +1,4 @@
 .boards {
-  min-height: 100vh;
   display: grid;
   grid-template-columns: repeat(4, minmax(core.to-rem(320), 1fr));
   justify-content: space-between;
@@ -38,10 +37,34 @@
 }
 
 .board {
+  max-height: 75vh;
+  height: min-content;
+  overflow-y: auto;
   transition-property: border-color;
   transition-duration: 250ms;
   border: core.to-rem(2) solid transparent;
   border-radius: core.to-rem(4);
+  margin-right: core.to-rem(5);
+
+  &::-webkit-scrollbar {
+    height: core.to-rem(5);
+    padding: core.to-rem(20);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: core.to-rem(20);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--background-primary);
+    border-radius: core.to-rem(20);
+    cursor: pointer;
+
+    @include core.effect {
+      background-color: var(--blue);
+    }
+  }
 }
 
 .droppable {
